@@ -300,6 +300,10 @@ Outputs:
   SimpleVPCId:
     Value: !Ref SimpleVPC
 
+  PublicServerDNS:
+    Value: !GetAtt MyEC2Instance.PublicDnsName
+
+
 ########################################################################
 # Metadata is used to group and order how the CloudFormation parameters are 
 # displayed when you deploy the template using the AWS Console
