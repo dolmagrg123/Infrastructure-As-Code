@@ -106,15 +106,9 @@ Conditions:
 ########################################################################
 
 Resources:
-
   ###########
-  # Student added resources
+  # VPC with Internet Gateway
   ###########
-
-  MyS3Bucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Ref S3BucketName
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
@@ -122,16 +116,18 @@ Resources:
       IamInstanceProfile: !Ref Web1InstanceInstanceProfile
       ImageId: !Ref LatestAmiId
       InstanceType: !Ref InstanceType
-      SecurityGroupIds: 
-        - !Ref PublicSecurityGroup
-      SubnetId: !Ref PublicSubnet1
+      # SecurityGroupIds: 
+      #   - !Ref PublicSecurityGroup
+      # SubnetId: !Ref PublicSubnet1
       Tags:
         - Key: Name
           Value: Simple Server
 
-  ###########
-  # VPC with Internet Gateway
-  ###########
+
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
 
   #VPC
   SimpleVPC:
@@ -255,7 +251,6 @@ Resources:
               - 'sts:AssumeRole'
       ManagedPolicyArns:
         - 'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore'
-
 
   # InstanceProfile allows you to connect IAM roles to EC2 servers
   Web1InstanceInstanceProfile:
